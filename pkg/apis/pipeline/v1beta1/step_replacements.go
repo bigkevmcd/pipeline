@@ -21,6 +21,6 @@ import (
 )
 
 func ApplyStepReplacements(step *Step, stringReplacements map[string]string, arrayReplacements map[string][]string) {
-	step.Script = substitution.ApplyReplacements(step.Script, stringReplacements)
+	step.Script = substitution.ApplyEscapedReplacements(step.Script, stringReplacements)
 	ApplyContainerReplacements(&step.Container, stringReplacements, arrayReplacements)
 }

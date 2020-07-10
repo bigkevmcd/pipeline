@@ -125,7 +125,26 @@ func TestApplyStepReplacements(t *testing.T) {
 		},
 	}
 	v1beta1.ApplyStepReplacements(&s, replacements, arrayReplacements)
-	if d := cmp.Diff(s, expected); d != "" {
+	if d := cmp.Diff(expected, s); d != "" {
+		t.Errorf("Container replacements failed: %s", d)
+	}
+}
+
+func TestEscapeStepReplacements(t *testing.T) {
+	replacements := map[string]string{
+		"replace.me": ";${}",
+	}
+	arrayReplacements := map[string][]string{}
+
+	s := v1beta1.Step{
+		Script: "%(replace.me)",
+	}
+
+	expected := v1beta1.Step{
+		Script: "';${}'",
+	}
+	v1beta1.ApplyStepReplacements(&s, replacements, arrayReplacements)
+	if d := cmp.Diff(expected, s); d != "" {
 		t.Errorf("Container replacements failed: %s", d)
 	}
 }

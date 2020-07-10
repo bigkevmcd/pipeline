@@ -537,6 +537,8 @@ google.golang.org/protobuf/types/known/structpb
 google.golang.org/protobuf/types/known/timestamppb
 google.golang.org/protobuf/types/known/wrapperspb
 google.golang.org/protobuf/types/pluginpb
+# gopkg.in/alessio/shellescape.v1 v1.0.0-20170105083845-52074bc9df61
+gopkg.in/alessio/shellescape.v1
 # gopkg.in/inf.v0 v0.9.1
 gopkg.in/inf.v0
 # gopkg.in/yaml.v2 v2.3.0

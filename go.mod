@@ -5,6 +5,7 @@ go 1.13
 require (
 	contrib.go.opencensus.io/exporter/stackdriver v0.13.1 // indirect
 	github.com/GoogleCloudPlatform/cloud-builders/gcs-fetcher v0.0.0-20191203181535-308b93ad1f39
+	github.com/alessio/shellescape v1.2.2 // indirect
 	github.com/aws/aws-sdk-go v1.30.16 // indirect
 	github.com/cloudevents/sdk-go/v2 v2.1.0
 	github.com/docker/cli v0.0.0-20200210162036-a4bedce16568 // indirect
@@ -27,6 +28,7 @@ require (
 	golang.org/x/text v0.3.3 // indirect
 	gomodules.xyz/jsonpatch/v2 v2.1.0
 	google.golang.org/protobuf v1.22.0 // indirect
+	gopkg.in/alessio/shellescape.v1 v1.0.0-20170105083845-52074bc9df61
 	gopkg.in/yaml.v2 v2.3.0 // indirect
 	k8s.io/api v0.17.6
 	k8s.io/apimachinery v0.17.6
