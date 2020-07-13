@@ -137,7 +137,7 @@ func TestEscapeStepReplacements(t *testing.T) {
 	arrayReplacements := map[string][]string{}
 
 	s := v1beta1.Step{
-		Script: "%(replace.me)",
+		Script: "#(replace.me)",
 	}
 
 	expected := v1beta1.Step{

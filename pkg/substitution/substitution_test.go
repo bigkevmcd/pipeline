@@ -156,11 +156,19 @@ func TestApplyReplacements(t *testing.T) {
 			},
 			expectedOutput: "this is a string",
 		},
+		{
+			name: "escape strings with escape indicator",
+			args: args{
+				input:        "sh #(test)",
+				replacements: map[string]string{"test": ";${}"},
+			},
+			expectedOutput: "sh ';${}'",
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			actualOutput := substitution.ApplyReplacements(tt.args.input, tt.args.replacements)
-			if d := cmp.Diff(actualOutput, tt.expectedOutput); d != "" {
+			if d := cmp.Diff(tt.expectedOutput, actualOutput); d != "" {
 				t.Errorf("ApplyReplacements() output did not match expected value %s", diff.PrintWantGot(d))
 			}
 		})

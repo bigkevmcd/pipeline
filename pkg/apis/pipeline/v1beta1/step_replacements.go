@@ -20,7 +20,9 @@ import (
 	"github.com/tektoncd/pipeline/pkg/substitution"
 )
 
+// ApplyStepReplacements applies the templating replacements $() and #() in the
+// Script and Container elements.
 func ApplyStepReplacements(step *Step, stringReplacements map[string]string, arrayReplacements map[string][]string) {
-	step.Script = substitution.ApplyEscapedReplacements(step.Script, stringReplacements)
+	step.Script = substitution.ApplyReplacements(step.Script, stringReplacements)
 	ApplyContainerReplacements(&step.Container, stringReplacements, arrayReplacements)
 }
