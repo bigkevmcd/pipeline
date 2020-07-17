@@ -440,16 +440,19 @@ func TestContext(t *testing.T) {
 				))),
 	}, {
 		description: "context pipelineRunName replacement with defined pipelineRun in spec",
-		pr:          tb.PipelineRun("pipelineRunName"),
+		pr: tb.PipelineRun("pipelineRunName",
+			tb.PipelineRunAnnotation("test-field", "my-value")),
 		original: tb.Pipeline("test-pipeline",
 			tb.PipelineSpec(
 				tb.PipelineTask("first-task-1", "first-task",
 					tb.PipelineTaskParam("first-task-first-param", "$(context.pipelineRun.name)-1"),
+					tb.PipelineTaskParam("first-task-second-param", "$(context.pipelineRun.annotations.test-field)"),
 				))),
 		expected: tb.Pipeline("test-pipeline",
 			tb.PipelineSpec(
 				tb.PipelineTask("first-task-1", "first-task",
 					tb.PipelineTaskParam("first-task-first-param", "pipelineRunName-1"),
+					tb.PipelineTaskParam("first-task-second-param", "my-value"),
 				))),
 	}, {
 		description: "context pipelineRunNameNamespace replacement with defined pipelineRunNamepsace in spec",

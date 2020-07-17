@@ -56,10 +56,15 @@ func ApplyParameters(p *v1beta1.PipelineSpec, pr *v1beta1.PipelineRun) *v1beta1.
 // ApplyContexts applies the substitution from $(context.(pipelineRun|pipeline).*) with the specified values.
 // Currently supports only name substitution. Uses "" as a default if name is not specified.
 func ApplyContexts(spec *v1beta1.PipelineSpec, pipelineName string, pr *v1beta1.PipelineRun) *v1beta1.PipelineSpec {
+	annotations := map[string]string{"context.pipelineRun.name": pr.Name,
+		"context.pipeline.name":         pipelineName,
+		"context.pipelineRun.namespace": pr.Namespace,
+	}
+	for k, v := range pr.Annotations {
+		annotations[fmt.Sprintf("context.pipelineRun.annotations.%s", k)] = v
+	}
 	return ApplyReplacements(spec,
-		map[string]string{"context.pipelineRun.name": pr.Name,
-			"context.pipeline.name":         pipelineName,
-			"context.pipelineRun.namespace": pr.Namespace},
+		annotations,
 		map[string][]string{})
 }
 
